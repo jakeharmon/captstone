@@ -1,0 +1,26 @@
+Steps to get total word counts.
+#clean and get word counts
+cat final/en_US/en_US.*.txt | tr -cd [:print:] | tr -d [:punct:] | tr -d 0-9 | tr A-Z a-z | tr [:space:] '\n' | grep -v "^\s*$" | sort | uniq -c | sort -bnr > all_word_counts.txt all_word_counts.txt
+#Prepare file for loading into R by trimming whitespace from the first column.
+cat all_word_counts.txt |  sed -e 's/^[ \t]*//' > all_word_counts_clean.txt 
+# remove extra file
+mv all_word_counts_clean.txt all_word_counts.txt 
+
+
+Some words are more frequent than others - what are the distributions of word frequencies? 
+What are the frequencies of 2-grams and 3-grams in the dataset? 
+How many unique words do you need in a frequency sorted dictionary to cover 50% of all word instances in the language? 90%? 
+How do you evaluate how many of the words come from foreign languages? 
+Can you think of a way to increase the coverage -- identifying words that may not be in the corpora or using a smaller number of words in the dictionary to cover the same number of phrases?
+
+6
+6-3 = 3
+3, 4, 5, 6
+5-3 = 2
+2, 3, 4, 5
+4-3 = 1
+1,2,3,4
+3-1 = 2
+1,2,3
+2-1 = 1
+1,2
